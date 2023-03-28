@@ -9,8 +9,9 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-xl-2 col-lg-3 col-md-12">
-                    <a href="https://localhost:44335/" class="brand-wrap">
+                    <a href="@Url.Action("Index","Home", new {})" class="brand-wrap">
                         <img class="logo" src="~/Content/images/logo.png">
+                    </a> <!-- brand-wrap.// -->
                     </a> <!-- brand-wrap.// -->
                 </div>
                 <div class="col-xl-6 col-lg-5 col-md-6">
@@ -35,37 +36,37 @@
                 <div class="col-xl-4 col-lg-4 col-md-6">
                     <div class="widgets-wrap float-md-right">
                         <div class="widget-header mr-3">
-                            <a href="https://localhost:44335/Login/User" class="widget-view">
+                            <a href="@Url.Action("Login","Home", new {})" class="widget-view">
                                 <div class="icon-area">
                                     <i class="fa fa-user"></i>
                                     <span class="notify">3</span>
                                 </div>
-                                <small class="text"> Đăng nhập </small>
+                                <small class="text"> @Html.ActionLink("Đăng nhập", "Login", "Home", new { }, null) </small> </small>
                             </a>
                         </div>
                         <div class="widget-header mr-3">
-                            <a href="https://localhost:44335/Register/User" class="widget-view">
+                            <a href="@Url.Action("Register","Home", new {})" class="widget-view">
                                 <div class="icon-area">
                                     <i class="fa fa-comment-dots"></i>
-                                    <span class="notify">1</span>
+                                    
                                 </div>
-                                <small class="text"> Đăng ký </small>
+                                <small class="text"> @Html.ActionLink("Đăng Ký", "Register", "Home", new { }, null)</small>
                             </a>
                         </div>
                         <div class="widget-header mr-3">
-                            <a href="https://localhost:44335/Grid/Listing" class="widget-view">
+                            <a href="@Url.Action("Listing","Grid", new {})" class="widget-view">
                                 <div class="icon-area">
                                     <i class="fa fa-store"></i>
                                 </div>
-                                <small class="text"> Đặt hàng </small>
+                                <small class="text">@Html.ActionLink("Đặt hàng", "Listing", "Grid", new { }, null) </small>
                             </a>
                         </div>
                         <div class="widget-header">
-                            <a href="https://localhost:44335/Cart/Shopping" class="widget-view">
+                            <a href="@Url.Action("Shopping","Cart", new {})" class="widget-view">
                                 <div class="icon-area">
                                     <i class="fa fa-shopping-cart"></i>
                                 </div>
-                                <small class="text"> Giỏ hàng </small>
+                                <small class="text">@Html.ActionLink("Giỏ hàng", "Shopping", "Cart", new { }, null)</small>
                             </a>
                         </div>
                     </div> <!-- widgets-wrap.// -->
