@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Linq;
 using System.Web.Mvc;
 using Webbanhang.Context;
 
@@ -18,7 +15,7 @@ namespace Webbanhang.Controllers
         }
         public ActionResult ProductCategory(int Id)
         {
-            var lstProduct = objlocEntities.Products.Where(n =>n.CategoryId == Id).ToList();
+            var lstProduct = objlocEntities.Products.Where(n => n.CategoryId == Id).ToList();
             return View(lstProduct);
         }
     }

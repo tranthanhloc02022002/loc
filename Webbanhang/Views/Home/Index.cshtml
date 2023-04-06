@@ -1,5 +1,6 @@
 ﻿@model Webbanhang.Models.HomeModel
 
+
 @{
     ViewBag.Title = "Home Page";
 }
@@ -19,16 +20,16 @@
                         <form action="#" class="search-header">
                             <div class="input-group w-100">
                                 <select class="custom-select border-right" name="category_name">
-                                    <option value="">All type</option>
-                                    <option value="codex">Special</option>
-                                    <option value="comments">Only best</option>
-                                    <option value="content">Latest</option>
+                                    <option value="">Kiểu sản phẩm</option>
+                                    <option value="codex">Đặc biệt</option>
+                                    <option value="comments">Chỉ có một sản phẩm</option>
+                                    <option value="content">Sản phẩm cuối</option>
                                 </select>
                                 <input type="text" class="form-control" placeholder="Search">
 
                                 <div class="input-group-append">
                                     <button class="btn btn-primary" type="submit">
-                                        <i class="fa fa-search"></i> Search
+                                        <i class="fa fa-search"></i> Tìm kiếm
                                     </button>
                                 </div>
                             </div>
@@ -46,7 +47,7 @@
                                     @if (Session["idUser"] != null)
                                     {
                                         <small class="text">
-                                            <a href="#">Trang Admin </a>
+                                            <a href="@Url.Action("Index","Product", new {})">Trang Admin </a>
                                         </small>
                                         <a href="~/Home/Logout">Đăng Xuất </a>
 
@@ -77,11 +78,12 @@
                                         </a>
                                     </div>
                                     <div class="widget-header">
-                                        <a  href="@Url.Action("Shopping","Cart", new {})" class="widget-view">
+                                        <a  href="@Url.Action("Index","Cart", new {})" class="widget-view">
                                             <div class="icon-area">
                                                 <i class="fa fa-shopping-cart"></i>
+                                                <span class="notify" id="CartCount">@Session["count"]</span>
                                             </div>
-                                            <small class="text">@Html.ActionLink("Giỏ hàng", "Shopping", "Cart", new { }, null)</small>
+                                            <small class="text">@Html.ActionLink("Giỏ hàng", "Index", "Cart", new { }, null)</small>
                                         </a>
                                     </div>
                                 </div> <!-- widgets-wrap.// -->
@@ -102,15 +104,13 @@
                         <div class="collapse navbar-collapse" id="main_nav">
                             <ul class="navbar-nav">
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href=""> <i class="fa fa-bars text-muted mr-2"></i> Categories </a>
+                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href=""> <i class="fa fa-bars text-muted mr-2"></i> Danh mục </a>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="#">Machinery</a>
-                                        <a class="dropdown-item" href="#">Electronics</a>
-                                        <a class="dropdown-item" href="#">Home textile</a>
-                                        <a class="dropdown-item" href="#">Home and kitchen</a>
-                                        <a class="dropdown-item" href="#">Service and equipment</a>
-                                        <a class="dropdown-item" href="#">Healthcare items</a>
-                                        <a class="dropdown-item" href="#">Toys and Hobbies</a>
+                                        <a class="dropdown-item" href="@Url.Action("Category","ProductCategory","1")">Điện thoại</a>
+                                        <a class="dropdown-item" href="@Url.Action("Category","ProductCategory","2")">Máy tính</a>
+                                        <a class="dropdown-item" href="@Url.Action("Category","ProductCategory","3")">Máy tính bảng</a>
+                                        <a class="dropdown-item" href="@Url.Action("Category","ProductCategory","4")">Phụ kiện</a>
+                                        <a class="dropdown-item" href="@Url.Action("Category","ProductCategory","5")">Đồng hồ thông minh</a>
                                     </div>
                                 </li>
                                 <li class="nav-item">
@@ -291,8 +291,9 @@
                 <div class="card card-home-category">
                     <div class="row no-gutters">
                         <div class="col-md-3">
-
-                            <div class="home-category-banner ">
+                            <div class="home-category-banner bg-light-orange">
+                                <h5 class="title">Iphone người bàn đồng hành lý tưởng cho con người</h5>
+                                <p>Hãy tận lực cố gắng vì một ngày mới năng động cho cuộc sống đầy muôn màu</p>
                                 <h5 class="title"></h5>
                                 <p></p>
 
@@ -302,7 +303,7 @@
                         </div> <!-- col.// -->
                         <div class="col-md-9">
                             <ul class="row no-gutters bordered-cols">
-                                @foreach (var item in Model.ListProduct.Where(n=>n.BrandId==1).Take(4))
+                                @foreach (var item in Model.ListProduct.Where(n=>n.BrandId==1))
                                 {
                                 <li class="col-6 col-lg-3 col-md-4">
                                     <a href="@Url.Action("Detail","Product", new {id=item.Id})" class="item">
@@ -334,14 +335,13 @@
                 <div class="card card-home-category">
                     <div class="row no-gutters">
                         <div class="col-md-3">
-
-                            <div class="home-category-banner ">
-                                <h5 class="title"></h5>
-
+                            <div class="home-category-banner bg-light-orange">
+                                <h5 class="title">Samsung mang đến thế giới đa màu sắc cho bạn</h5>
+                                <p>Mua và tận hưởng ngay những giây phút yên bình cùng người thân và bạn bè</p>                                
                                 <img src="~/Content/images/banners/4.jpg" class="img-bg">
                             </div>
 
-                        </div> <!-- col.// -->
+                            </div> <!-- col.// -->
                         <div class="col-md-9">
                             <ul class="row no-gutters bordered-cols">
                                 @foreach (var item in Model.ListProduct.Where(n => n.BrandId == 2))

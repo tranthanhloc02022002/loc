@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Web;
 using System.Web.Mvc;
 using Webbanhang.Context;
 using Webbanhang.Models;
 
 namespace Webbanhang.Controllers
 {
-    
+
     public class HomeController : Controller
     {
         locEntities objlocEntities = new locEntities();
@@ -106,10 +103,10 @@ namespace Webbanhang.Controllers
             Session.Clear();//remove session
             return RedirectToAction("Login");
         }
-    
 
-//create a string MD5
-public static string GetMD5(string str)
+
+        //create a string MD5
+        public static string GetMD5(string str)
         {
             MD5 md5 = new MD5CryptoServiceProvider();
             byte[] fromData = Encoding.UTF8.GetBytes(str);
