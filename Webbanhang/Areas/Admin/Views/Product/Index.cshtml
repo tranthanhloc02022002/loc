@@ -10,7 +10,7 @@
 }
 <div class="content-wrapper">
     <h2> Quản lý sản phẩm</h2>
-
+    @Html.ActionLink("Tạo","Create")
     @using (Html.BeginForm("Index", "Product", FormMethod.Get))
     {
         <p>
@@ -223,7 +223,7 @@
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Avartar)
+                    <img src="~/Content/images/items/@Html.DisplayFor(modelItem=>item.Avartar)" style="width:100px;height:100px" />
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.CategoryId)

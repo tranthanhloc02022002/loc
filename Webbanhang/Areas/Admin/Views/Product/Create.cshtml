@@ -6,7 +6,7 @@
 <div class="content-wrapper">
     <script src="~/Scripts/ckeditor/ckeditor.js"></script>
     <h2>Tạo</h2>
-
+   
     @using (Html.BeginForm("Create", "Product", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()

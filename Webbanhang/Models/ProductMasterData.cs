@@ -9,8 +9,9 @@ namespace Webbanhang.Models
 {
     public partial class ProductMasterData
     {
+     
         public int Id { get; set; }
-        [Required(ErrorMessage = "Vui lòng nhập sản phẩm")]
+        [Required(ErrorMessage = "Nhập sản phẩm")]
         [Display(Name = "Tên sản phẩm")]
         public string Name { get; set; }
         [Display(Name = "Hình Đại diện")]
