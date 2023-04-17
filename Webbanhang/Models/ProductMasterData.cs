@@ -11,7 +11,7 @@ namespace Webbanhang.Models
     {
      
         public int Id { get; set; }
-        [Required(ErrorMessage = "Nhập sản phẩm")]
+        [Required(ErrorMessage = "Nhập tên sản phẩm")]
         [Display(Name = "Tên sản phẩm")]
         public string Name { get; set; }
         [Display(Name = "Hình Đại diện")]

@@ -9,7 +9,7 @@ namespace Webbanhang.Models
         public string LastName { get; set; }
         public string Email { get; set; }
 
-        private string password;
+        private string Password { get; set; }
         public Nullable<bool> IsAdmin { get; set; }
         public Nullable<bool> Sex { get; set; }
     }

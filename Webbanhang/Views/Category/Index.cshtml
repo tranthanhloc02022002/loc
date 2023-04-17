@@ -12,61 +12,73 @@
                     <a href="@Url.Action("Index","Home", new {})" class="brand-wrap">
                         <img class="logo" src="~/Content/images/logo.png">
                     </a> <!-- brand-wrap.// -->
-                    </a> <!-- brand-wrap.// -->
+
                 </div>
                 <div class="col-xl-6 col-lg-5 col-md-6">
-                    <form action="#" class="search-header">
+                    <form action="@Url.Action("Search","Home")" class="search-header" name="timkiem">
                         <div class="input-group w-100">
-                            <select class="custom-select border-right" name="category_name">
-                                <option value="">All type</option>
-                                <option value="codex">Special</option>
-                                <option value="comments">Only best</option>
-                                <option value="content">Latest</option>
-                            </select>
-                            <input type="text" class="form-control" placeholder="Search">
+                            @*<input type="text" name="search" class="form-control" />
+                                <input type="submit" name="submit" value="tìm kiếm" class="form-control"/>*@
 
+
+                            <input type="text" class="form-control" placeholder="Tìm kiếm sản phẩm" name="key">
                             <div class="input-group-append">
                                 <button class="btn btn-primary" type="submit">
-                                    <i class="fa fa-search"></i> Search
+                                    <i class="fa fa-search"></i> Tìm kiếm
                                 </button>
                             </div>
                         </div>
                     </form> <!-- search-wrap .end// -->
-                </div> <!-- col.// -->
+                </div><!-- col.// -->
                 <div class="col-xl-4 col-lg-4 col-md-6">
                     <div class="widgets-wrap float-md-right">
                         <div class="widget-header mr-3">
                             <a href="@Url.Action("Login","Home", new {})" class="widget-view">
                                 <div class="icon-area">
                                     <i class="fa fa-user"></i>
-                                    <span class="notify">3</span>
                                 </div>
-                                <small class="text"> @Html.ActionLink("Đăng nhập", "Login", "Home", new { }, null) </small> </small>
-                            </a>
+
+
+                                @if (Session["idUser"] != null)
+                                {
+                                    <small class="text">
+                                        <a href="~/Admin/Product/Index">Trang Admin </a>
+                                    </small>
+                                    <a href="~/Home/Logout">Đăng Xuất </a>
+
+                                }
+                                else
+                                {
+                                    <small class="text">
+                                        <a href="~/Home/Login">Đăng Nhập</a>
+                                    </small>
+                                }
+
                         </div>
+
                         <div class="widget-header mr-3">
                             <a href="@Url.Action("Register","Home", new {})" class="widget-view">
                                 <div class="icon-area">
-                                    <i class="fa fa-comment-dots"></i>
-                                    
+                                    <i class="fa fa-user"></i>
                                 </div>
-                                <small class="text"> @Html.ActionLink("Đăng Ký", "Register", "Home", new { }, null)</small>
+                                <small class="text">@Html.ActionLink("Đăng Ký", "Register", "Home", new { }, null) </small>
                             </a>
                         </div>
-                        <div class="widget-header mr-3">
-                            <a href="@Url.Action("Listing","Grid", new {})" class="widget-view">
-                                <div class="icon-area">
-                                    <i class="fa fa-store"></i>
-                                </div>
-                                <small class="text">@Html.ActionLink("Đặt hàng", "Listing", "Grid", new { }, null) </small>
-                            </a>
-                        </div>
+                        @*<div class="widget-header mr-3">
+                                <a href="@Url.Action("Listing","Grid", new {})" class="widget-view">
+                                    <div class="icon-area">
+                                        <i class="fa fa-store"></i>
+                                    </div>
+                                    <small class="text"> @Html.ActionLink("Đặt hàng", "Listing", "Grid", new { }, null) </small>
+                                </a>
+                            </div>*@
                         <div class="widget-header">
-                            <a href="@Url.Action("Shopping","Cart", new {})" class="widget-view">
+                            <a href="@Url.Action("Index","Cart", new {})" class="widget-view">
                                 <div class="icon-area">
                                     <i class="fa fa-shopping-cart"></i>
+                                    <span class="notify" id="CartCount">@Session["count"]</span>
                                 </div>
-                                <small class="text">@Html.ActionLink("Giỏ hàng", "Shopping", "Cart", new { }, null)</small>
+                                <small class="text">@Html.ActionLink("Giỏ hàng", "Index", "Cart", new { }, null)</small>
                             </a>
                         </div>
                     </div> <!-- widgets-wrap.// -->
@@ -75,6 +87,7 @@
         </div> <!-- container.// -->
     </section> <!-- header-main .// -->
 
+
     <nav class="navbar navbar-main navbar-expand-lg border-bottom">
         <div class="container">
 
@@ -82,66 +95,30 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
 
+
             <div class="collapse navbar-collapse" id="main_nav">
                 <ul class="navbar-nav">
+
+
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"> <i class="fa fa-bars text-muted mr-2"></i> Categories </a>
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Trang cần tìm</a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">Machinery</a>
-                            <a class="dropdown-item" href="#">Electronics</a>
-                            <a class="dropdown-item" href="#">Home textile</a>
-                            <a class="dropdown-item" href="#">Home and kitchen</a>
-                            <a class="dropdown-item" href="#">Service and equipment</a>
-                            <a class="dropdown-item" href="#">Healthcare items</a>
-                            <a class="dropdown-item" href="#">Toys and Hobbies</a>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Ready to ship</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Trade shows</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Services</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Sell with us</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Demo pages</a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="page-index.html">Main</a>
-                            <a class="dropdown-item" href="page-category.html">All category</a>
-                            <a class="dropdown-item" href="page-listing-large.html">Listing list</a>
-                            <a class="dropdown-item" href="page-listing-grid.html">Listing grid</a>
-                            <a class="dropdown-item" href="page-shopping-cart.html">Shopping cart</a>
-                            <a class="dropdown-item" href="page-detail-product.html">Item detail</a>
-                            <a class="dropdown-item" href="page-content.html">Info content</a>
-                            <a class="dropdown-item" href="page-user-login.html">Page login</a>
-                            <a class="dropdown-item" href="page-user-register.html">Page register</a>
-                            <a class="dropdown-item disabled text-muted" href="#">More components</a>
+                            <a class="dropdown-item" @Html.ActionLink("Trang chủ", "Index", "Home")</a>
+                            <a class="dropdown-item" @Html.ActionLink("Tất cả danh mục", "Index", "Category")</a>
+                            @*<a class="dropdown-item" @Html.ActionLink("Danh sách liệt kê", "Listing", "Large")</a>
+                                <a class="dropdown-item" @Html.ActionLink("Danh sách lưới", "Listing", "Grid")</a>*@
+                          
+                            <a class="dropdown-item" @Html.ActionLink("Trang Đăng Nhập", "Login", "Home")</a>
+                            <a class="dropdown-item" @Html.ActionLink("Trang Đăng Ký", "Register", "Home")</a>
+
                         </div>
                     </li>
                 </ul>
-                <ul class="navbar-nav ml-md-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Get the app</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="http://example.com" data-toggle="dropdown">English</a>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item" href="#">Russian</a>
-                            <a class="dropdown-item" href="#">French</a>
-                            <a class="dropdown-item" href="#">Spanish</a>
-                            <a class="dropdown-item" href="#">Chinese</a>
-                        </div>
-                    </li>
-                </ul>
+
             </div> <!-- collapse .// -->
         </div> <!-- container .// -->
     </nav>
-</header> <!-- section-header.// -->
+</header>
 <!-- ========================= SECTION CONTENT ========================= -->
 <section class="section-content padding-y">
     <div class="container">
@@ -157,8 +134,8 @@
                         </div>
 
                         <div class="card-body">
-                            <h4 class="card-title"><a href="#">@item.Name</a></h4>
-                            
+                            <h4 class="card-title"><a href="~/Category/ProductCategory/@item.Id">@item.Name</a></h4>
+
                         </div>
                     </div>
                 </div> <!-- col.// -->
@@ -172,27 +149,5 @@
 </section>
 <!-- ========================= SECTION CONTENT END// ========================= -->
 <!-- ========================= SECTION SUBSCRIBE  ========================= -->
-<section class="padding-y-lg bg-light border-top">
-    <div class="container">
-
-        <p class="pb-2 text-center">Delivering the latest product trends and industry news straight to your inbox</p>
-
-        <div class="row justify-content-md-center">
-            <div class="col-lg-4 col-sm-6">
-                <form class="form-row">
-                    <div class="col-8">
-                        <input class="form-control" placeholder="Your Email" type="email">
-                    </div> <!-- col.// -->
-                    <div class="col-4">
-                        <button type="submit" class="btn btn-block btn-warning"> <i class="fa fa-envelope"></i> Subscribe </button>
-                    </div> <!-- col.// -->
-                </form>
-                <small class="form-text">We’ll never share your email address with a third-party. </small>
-            </div> <!-- col-md-6.// -->
-        </div>
-
-
-    </div>
-</section>
 <!-- ========================= SECTION SUBSCRIBE END// ========================= -->
 <!-- ========================= FOOTER ========================= -->

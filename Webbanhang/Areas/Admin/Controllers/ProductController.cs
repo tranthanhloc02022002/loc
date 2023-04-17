@@ -1,5 +1,4 @@
-﻿using DocumentFormat.OpenXml.EMMA;
-using PagedList;
+﻿using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -43,7 +42,6 @@ namespace Webbanhang.Areas.Admin.Controllers
             return View(lstProduct.ToPagedList(pageNumber, pageSize));
         }
 
-
         [HttpGet]
         public ActionResult Create()
         {
@@ -79,39 +77,14 @@ namespace Webbanhang.Areas.Admin.Controllers
                     return RedirectToAction("Index");
                 }
             }
-            return View(objlocEntities);
+            return View(objProduct);
         }
-        [HttpGet]
-        public ActionResult Edit(int id)
-        {
-            this.LoadData();
-            var objProduct = objlocEntities.Products.Where(n => n.Id == id).FirstOrDefault();
-            return View();
-        }
-        [HttpPost]
-        public ActionResult Edit(int id, Product objProduct)
-        {
-            if (objProduct.ImageUpload != null)
-            {
-                string fileName = Path.GetFileNameWithoutExtension(objProduct.ImageUpload.FileName);
-                string extension = Path.GetExtension(objProduct.ImageUpload.FileName);
-                fileName = fileName + extension;
-                objProduct.Avartar = fileName;
-                objProduct.ImageUpload.SaveAs(Path.Combine(Server.MapPath("~/Content/images/"), fileName));
-            }
-            objlocEntities.Entry(objProduct).State = EntityState.Modified;
-          
-            objlocEntities.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
         [HttpGet]
         public ActionResult Details(int id)
         {
-            this.LoadData();
             var objProduct = objlocEntities.Products.Where(n => n.Id == id).FirstOrDefault();
             return View(objProduct);
-        }      
+        }
         [HttpGet]
         public ActionResult Delete(int id)
         {
@@ -127,7 +100,29 @@ namespace Webbanhang.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
         [HttpGet]
-        
+        public ActionResult Edit(int id)
+        {
+            this.LoadData();
+
+            var objProduct = objlocEntities.Products.Where(n => n.Id == id).FirstOrDefault();
+            return View(objProduct);
+        }
+        [ValidateInput(false)]
+        [HttpPost]
+        public ActionResult Edit(int id, Product objProduct)
+       {
+          if (objProduct.ImageUpload != null)
+        {
+          string fileName = Path.GetFileNameWithoutExtension(objProduct.ImageUpload.FileName);
+          string extension = Path.GetExtension(objProduct.ImageUpload.FileName);
+          fileName = fileName + extension;
+          objProduct.Avartar = fileName;
+          objProduct.ImageUpload.SaveAs(Path.Combine(Server.MapPath("~/Content/images/"), fileName));
+         }
+          objlocEntities.Entry(objProduct).State = EntityState.Modified;
+          objlocEntities.SaveChanges();
+          return RedirectToAction("Index");
+         }
         void LoadData()
         {
             Common objCommon = new Common();
@@ -154,7 +149,7 @@ namespace Webbanhang.Areas.Admin.Controllers
             objproductType.Name = "Đề Xuất";
             lstProductType.Add(objproductType);
 
-
+            
 
 
             DataTable dtProductType = converter.ToDataTable(lstProductType);

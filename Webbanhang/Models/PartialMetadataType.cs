@@ -18,4 +18,14 @@ namespace Webbanhang.Context
         [NotMapped]
         public System.Web.HttpPostedFileBase ImageUpload { get; set; }
     }
+    [MetadataType(typeof(BrandMasterData))]
+    public partial class Brand
+    {
+       
+    }
+    [MetadataType(typeof(CategoryMasterData))]
+    public partial class Category
+    {
+
+    }
 }

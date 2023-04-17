@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Listing";
 }
 <header class="section-header">
@@ -10,21 +9,22 @@
                     <a href="@Url.Action("Index","Home", new {})" class="brand-wrap">
                         <img class="logo" src="~/Content/images/logo.png">
                     </a> <!-- brand-wrap.// -->
+
                 </div>
                 <div class="col-xl-6 col-lg-5 col-md-6">
                     <form action="#" class="search-header">
                         <div class="input-group w-100">
                             <select class="custom-select border-right" name="category_name">
-                                <option value="">All type</option>
-                                <option value="codex">Special</option>
-                                <option value="comments">Only best</option>
-                                <option value="content">Latest</option>
+                                <option value="">Kiểu sản phẩm</option>
+                                <option value="codex">Đặc biệt</option>
+                                <option value="comments">Chỉ có một sản phẩm</option>
+                                <option value="content">Sản phẩm cuối</option>
                             </select>
-                            <input type="text" class="form-control" placeholder="Search">
+                            <input type="text" class="form-control" placeholder="Tìm kiếm">
 
                             <div class="input-group-append">
                                 <button class="btn btn-primary" type="submit">
-                                    <i class="fa fa-search"></i> Search
+                                    <i class="fa fa-search"></i> Tìm kiếm
                                 </button>
                             </div>
                         </div>
@@ -33,25 +33,39 @@
                 <div class="col-xl-4 col-lg-4 col-md-6">
                     <div class="widgets-wrap float-md-right">
                         <div class="widget-header mr-3">
-                            <a class="widget-view">
+                            <a href="@Url.Action("Login","Home", new {})" class="widget-view">
                                 <div class="icon-area">
                                     <i class="fa fa-user"></i>
-                                    <span class="notify">3</span>
                                 </div>
-                                <small class="text">  @Html.ActionLink("Đăng nhập", "User", "Login", new { }, null) </small>
-                            </a>
+
+
+                                @if (Session["idUser"] != null)
+                                {
+                                    <small class="text">
+                                        <a href="~/Admin/Product/Index">Trang Admin </a>
+                                    </small>
+                                    <a href="~/Home/Logout">Đăng Xuất </a>
+
+                                }
+                                else
+                                {
+                                    <small class="text">
+                                        <a href="~/Home/Login">Đăng Nhập</a>
+                                    </small>
+                                }
+
                         </div>
+
                         <div class="widget-header mr-3">
-                            <a  class="widget-view">
+                            <a href="@Url.Action("Register","Home", new {})" class="widget-view">
                                 <div class="icon-area">
-                                    <i class="fa fa-comment-dots"></i>
-                                    <span class="notify">1</span>
+                                    <i class="fa fa-user"></i>
                                 </div>
-                                <small class="text"> @Html.ActionLink("Đăng Ký", "User", "Register", new { }, null) </small>
+                                <small class="text">@Html.ActionLink("Đăng Ký", "Register", "Home", new { }, null) </small>
                             </a>
                         </div>
                         <div class="widget-header mr-3">
-                            <a href = class="widget-view">
+                            <a href="@Url.Action("Listing","Grid", new {})" class="widget-view">
                                 <div class="icon-area">
                                     <i class="fa fa-store"></i>
                                 </div>
@@ -59,11 +73,12 @@
                             </a>
                         </div>
                         <div class="widget-header">
-                            <a href="https://localhost:44335/Cart/Shopping" class="widget-view">
+                            <a href="@Url.Action("Index","Cart", new {})" class="widget-view">
                                 <div class="icon-area">
                                     <i class="fa fa-shopping-cart"></i>
+                                    <span class="notify" id="CartCount">@Session["count"]</span>
                                 </div>
-                                <small class="text"> Giỏ hàng </small>
+                                <small class="text">@Html.ActionLink("Giỏ hàng", "Index", "Cart", new { }, null)</small>
                             </a>
                         </div>
                     </div> <!-- widgets-wrap.// -->
@@ -72,6 +87,7 @@
         </div> <!-- container.// -->
     </section> <!-- header-main .// -->
 
+
     <nav class="navbar navbar-main navbar-expand-lg border-bottom">
         <div class="container">
 
@@ -79,228 +95,102 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
 
+
             <div class="collapse navbar-collapse" id="main_nav">
                 <ul class="navbar-nav">
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"> <i class="fa fa-bars text-muted mr-2"></i> Categories </a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">Machinery</a>
-                            <a class="dropdown-item" href="#">Electronics</a>
-                            <a class="dropdown-item" href="#">Home textile</a>
-                            <a class="dropdown-item" href="#">Home and kitchen</a>
-                            <a class="dropdown-item" href="#">Service and equipment</a>
-                            <a class="dropdown-item" href="#">Healthcare items</a>
-                            <a class="dropdown-item" href="#">Toys and Hobbies</a>
-                        </div>
+
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Ready to ship</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Trade shows</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Services</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Sell with us</a>
-                    </li>
+
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Demo pages</a>
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Trang cần tìm</a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="page-index.html">Main</a>
-                            <a class="dropdown-item" href="page-category.html">All category</a>
-                            <a class="dropdown-item" href="page-listing-large.html">Listing list</a>
-                            <a class="dropdown-item" href="page-listing-grid.html">Listing grid</a>
-                            <a class="dropdown-item" href="page-shopping-cart.html">Shopping cart</a>
-                            <a class="dropdown-item" href="page-detail-product.html">Item detail</a>
-                            <a class="dropdown-item" href="page-content.html">Info content</a>
-                            <a class="dropdown-item" href="page-user-login.html">Page login</a>
-                            <a class="dropdown-item" href="page-user-register.html">Page register</a>
-                            <a class="dropdown-item disabled text-muted" href="#">More components</a>
+                            <a class="dropdown-item" @Html.ActionLink("Trang chủ", "Index", "Home")</a>
+                            <a class="dropdown-item" @Html.ActionLink("Tất cả danh mục", "Index", "Category")</a>
+                            <a class="dropdown-item" @Html.ActionLink("Danh sách liệt kê", "Listing", "Large")</a>
+                            <a class="dropdown-item" @Html.ActionLink("Danh sách lưới", "Listing", "Grid")</a>
+                            <a class="dropdown-item" @Html.ActionLink("Giỏ hàng", "Index", "Category")</a>
+                            <a class="dropdown-item" @Html.ActionLink("Trang Đăng Nhập", "Login", "Home")</a>
+                            <a class="dropdown-item" @Html.ActionLink("Trang Đăng Ký", "Register", "Home")</a>
+
                         </div>
                     </li>
                 </ul>
-                <ul class="navbar-nav ml-md-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Get the app</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="http://example.com" data-toggle="dropdown">English</a>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item" href="#">Russian</a>
-                            <a class="dropdown-item" href="#">French</a>
-                            <a class="dropdown-item" href="#">Spanish</a>
-                            <a class="dropdown-item" href="#">Chinese</a>
-                        </div>
-                    </li>
-                </ul>
+
             </div> <!-- collapse .// -->
         </div> <!-- container .// -->
     </nav>
-</header> <!-- section-header.// -->
+</header><!-- section-header.// -->
 <!-- ========================= SECTION CONTENT ========================= -->
 <section class="section-content padding-y">
     <div class="container">
 
 
         <!-- ============================  FILTER TOP  ================================= -->
-        <div class="card mb-3">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-2"> Your are here: </div> <!-- col.// -->
-                    <nav class="col-md-8">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item"><a href="#">Category name</a></li>
-                            <li class="breadcrumb-item"><a href="#">Sub category</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Items</li>
-                        </ol>
-                    </nav> <!-- col.// -->
-                </div> <!-- row.// -->
-                <hr>
-                <div class="row">
-                    <div class="col-md-2">Filter by</div> <!-- col.// -->
-                    <div class="col-md-10">
-                        <ul class="list-inline">
-                            <li class="list-inline-item mr-3 dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">   Supplier type </a>
-                                <div class="dropdown-menu p-3" style="max-width:400px;">
-                                    <label class="form-check">
-                                        <input type="radio" name="myfilter" class="form-check-input"> Good supplier
-                                    </label>
-                                    <label class="form-check">
-                                        <input type="radio" name="myfilter" class="form-check-input"> Best supplier
-                                    </label>
-                                    <label class="form-check">
-                                        <input type="radio" name="myfilter" class="form-check-input"> New supplier
-                                    </label>
-                                </div> <!-- dropdown-menu.// -->
-                            </li>
-                            <li class="list-inline-item mr-3 dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">  Country </a>
-                                <div class="dropdown-menu p-3">
-                                    <label class="form-check"> 	 <input type="checkbox" class="form-check-input"> China    </label>
-                                    <label class="form-check">   	 <input type="checkbox" class="form-check-input"> Japan      </label>
-                                    <label class="form-check">    <input type="checkbox" class="form-check-input"> Uzbekistan  </label>
-                                    <label class="form-check">  <input type="checkbox" class="form-check-input"> Russia     </label>
-                                </div> <!-- dropdown-menu.// -->
-                            </li>
-                            <li class="list-inline-item mr-3 dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Feature</a>
-                                <div class="dropdown-menu">
-                                    <a href="" class="dropdown-item">Anti backterial</a>
-                                    <a href="" class="dropdown-item">With buttons</a>
-                                    <a href="" class="dropdown-item">Extra safety</a>
-                                </div>
-                            </li>
-                            <li class="list-inline-item mr-3"><a href="#">Color</a></li>
-                            <li class="list-inline-item mr-3"><a href="#">Size</a></li>
-                            <li class="list-inline-item mr-3">
-                                <div class="form-inline">
-                                    <label class="mr-2">Price</label>
-                                    <input class="form-control form-control-sm" placeholder="Min" type="number">
-                                    <span class="px-2"> - </span>
-                                    <input class="form-control form-control-sm" placeholder="Max" type="number">
-                                    <button type="submit" class="btn btn-sm btn-light ml-2">Ok</button>
-                                </div>
-                            </li>
-                            <li class="list-inline-item mr-3">
-                                <label class="custom-control mt-1 custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input">
-                                    <div class="custom-control-label">
-                                        Ready to ship
-                                    </div>
-                                </label>
-                            </li>
-                        </ul>
-                    </div> <!-- col.// -->
-                </div> <!-- row.// -->
-            </div> <!-- card-body .// -->
-        </div> <!-- card.// -->
+        
         <!-- ============================ FILTER TOP END.// ================================= -->
 
         <header class="mb-3">
             <div class="form-inline">
                 <strong class="mr-md-auto">32 Items found </strong>
-                <select class="mr-2 form-control">
-                    <option>Latest items</option>
-                    <option>Trending</option>
-                    <option>Most Popular</option>
-                    <option>Cheapest</option>
-                </select>
-                <div class="btn-group">
-                    <a href="https://localhost:44335/Grid/Listing" class="btn btn-light active" data-toggle="tooltip" title="List view">
-                        <i class="fa fa-bars"></i>
-                    </a>
-                    <a href="https://localhost:44335/Large/Listing" class="btn btn-light" data-toggle="tooltip" title="Grid view">
-                        <i class="fa fa-th"></i>
-                    </a>
-                </div>
+                
+               
             </div>
         </header><!-- sect-heading -->
 
         <div class="row">
+
            
+                <div class="col-md-3">
+                    <figure class="card card-product-grid">
+                        <div class="img-wrap">
+                            <span class="badge badge-danger"> Mới </span>
+                            <img src="~/Content/images/items/2.jpg">
+                        </div> <!-- img-wrap.// -->
+                        <figcaption class="info-wrap">
+                            <a href="#" class="title mb-2">Quần áo demo giá rẻ và tốt nhất với phong cách thời trang mới nhất dành cho nam giới</a>
+                            <div class="price-wrap">
+                                <span class="price">600000</span>
+                                <small class="text-muted"></small>
+                            </div> <!-- price-wrap.// -->
 
-            <div class="col-md-3">
-                <figure class="card card-product-grid">
-                    <div class="img-wrap">
-                        <span class="badge badge-danger"> NEW </span>
-                        <img src="~/Content/images/items/1.jpg">
-                    </div> <!-- img-wrap.// -->
-                    <figcaption class="info-wrap">
-                        <a href="#" class="title mb-2">Cheap and Best demo clothe with latest Fashion styles for Men</a>
-                        <div class="price-wrap">
-                            <span class="price">$325.00-$390.00</span>
-                            <small class="text-muted">/per bag</small>
-                        </div> <!-- price-wrap.// -->
+                            <p class="mb-2"> <small class="text-muted"></small></p>
 
-                        <p class="mb-2"> 2 Pieces  <small class="text-muted">(Min Order)</small></p>
+                            <p class="text-muted ">Apple Inc</p>
 
-                        <p class="text-muted ">Guangzhou Yichuang Electronic Co</p>
+                            <hr>
 
-                        <hr>
+                            <p class="mb-3">
+                                <span class="tag"> <i class="fa fa-check"></i></span>
+                                <span class="tag">  </span>
+                                <span class="tag">  </span>
+                                <span class="tag">   </span>
+                            </p>
 
-                        <p class="mb-3">
-                            <span class="tag"> <i class="fa fa-check"></i> Verified</span>
-                            <span class="tag"> 4 Years </span>
-                            <span class="tag"> 60 reviews </span>
-                            <span class="tag"> China </span>
-                        </p>
+                            <label class="custom-control mb-3 custom-checkbox">
+                                <input type="checkbox" class="custom-control-input">
+                                
+                            </label>
 
-                        <label class="custom-control mb-3 custom-checkbox">
-                            <input type="checkbox" class="custom-control-input">
-                            <div class="custom-control-label">
-                                Add to compare
-                            </div>
-                        </label>
-
-                        <a href="#" class="btn btn-outline-primary"> <i class="fa fa-envelope"></i> Contact supplier </a>
-
-                    </figcaption>
-                </figure>
-            </div> <!-- col.// -->
+                        </figcaption>
+                    </figure>
+                </div> <!-- col.// -->
+            
+          
         </div> <!-- row end.// -->
 
 
         <nav class="mb-4" aria-label="Page navigation sample">
             <ul class="pagination">
-                <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
-                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">4</a></li>
-                <li class="page-item"><a class="page-link" href="#">5</a></li>
-                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+               
             </ul>
         </nav>
 
 
         <div class="box text-center">
-            <p>Did you find what you were looking for？</p>
-            <a href="" class="btn btn-light">Yes</a>
-            <a href="" class="btn btn-light">No</a>
+            <p>Bạn đã tìm thấy những gì bạn đang tìm kiếm?</p>
+            <a href="" class="btn btn-light">Có</a>
+            <a href="" class="btn btn-light">Không</a>
         </div>
 
     </div> <!-- container .//  -->
@@ -310,19 +200,19 @@
 <section class="padding-y-lg bg-light border-top">
     <div class="container">
 
-        <p class="pb-2 text-center">Delivering the latest product trends and industry news straight to your inbox</p>
+        <p class="pb-2 text-center">Cung cấp các xu hướng sản phẩm mới nhất và tin tức ngành trực tiếp vào hộp thư đến của bạn</p>
 
         <div class="row justify-content-md-center">
             <div class="col-lg-4 col-sm-6">
                 <form class="form-row">
                     <div class="col-8">
-                        <input class="form-control" placeholder="Your Email" type="email">
+                        <input class="form-control" placeholder="Email của bạn" type="email">
                     </div> <!-- col.// -->
                     <div class="col-4">
-                        <button type="submit" class="btn btn-block btn-warning"> <i class="fa fa-envelope"></i> Subscribe </button>
+                        <button type="submit" class="btn btn-block btn-warning"> <i class="fa fa-envelope"></i> Đăng ký </button>
                     </div> <!-- col.// -->
                 </form>
-                <small class="form-text">We’ll never share your email address with a third-party. </small>
+                <small class="form-text">Chúng tôi sẽ không bao giờ chia sẻ địa chỉ email của bạn với bên thứ ba. </small>
             </div> <!-- col-md-6.// -->
         </div>
 

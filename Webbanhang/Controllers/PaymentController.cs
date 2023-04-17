@@ -28,18 +28,18 @@ namespace Webbanhang.Controllers
                 objlocEntities.SaveChanges();
                 int intOrderId = objOrder.Id;
 
-                
-                // List<OrderDetail> lstOrderDetail = new List<OrderDetail>();
-                //foreach (var item in lstCart)
-                //{
-                    //OrderDetail obj = new OrderDetail();
-                    //obj.Quantity = item.Quantity;
-                    //obj.OrderId = intOrderId;
-                    //obj.ProductId = item.Product.Id;
-                  //  lstOrderDetail.Add(obj);
-                //}
-               // objlocEntities.OrderDetails.AddRange(lstOrderDetail);
-             //   objlocEntities.SaveChanges();
+
+                List<OrderDetail> lstOrderDetail = new List<OrderDetail>();
+                foreach (var item in lstCart)
+                {
+                    OrderDetail obj = new OrderDetail();
+                    obj.Quantity = item.Quantity;
+                    obj.OrderId = intOrderId;
+                    obj.ProductId = item.Product.Id;
+                    lstOrderDetail.Add(obj);
+                }
+                objlocEntities.OrderDetails.AddRange(lstOrderDetail);
+                objlocEntities.SaveChanges();
             }
             
             return View();

@@ -120,5 +120,9 @@ namespace Webbanhang.Controllers
             }
             return byte2String;
         }
+        public ActionResult Search(string Search, int id=0)
+        {
+            return View();
+        }
     }
 }
